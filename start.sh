@@ -21,3 +21,6 @@ docker-compose exec app php artisan jwt:secret
 
 # Run database migrations
 docker-compose exec app php artisan migrate
+
+# Create a symbolic link for uploaded files
+docker-compose exec app php artisan storage:link

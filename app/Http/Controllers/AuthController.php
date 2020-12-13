@@ -19,10 +19,6 @@ class AuthController extends Controller
             ->authenticationService
             ->register(new UserDTO(...$request->only('name', 'email', 'password')));
 
-        if (!$data) {
-            return response()->json(['error' => 'Bad request'], 400);
-        }
-
         return response()->json($data, 201);
     }
 
@@ -41,9 +37,7 @@ class AuthController extends Controller
 
     public function me(): JsonResponse
     {
-        $data = $this
-            ->authenticationService
-            ->me();
+        $data = $this->authenticationService->me();
 
         if (!$data) {
             return response()->json(['error' => 'Not found'], 404);
@@ -54,18 +48,14 @@ class AuthController extends Controller
 
     public function logout(): JsonResponse
     {
-        $this
-            ->authenticationService
-            ->logout();
+        $this->authenticationService->logout();
 
         return response()->json(['message' => 'Successfully logged out']);
     }
 
     public function refresh(): JsonResponse
     {
-        $data = $this
-            ->authenticationService
-            ->refresh();
+        $data = $this->authenticationService->refresh();
 
         if (!$data) {
             return response()->json(['error' => 'Unauthorized'], 401);

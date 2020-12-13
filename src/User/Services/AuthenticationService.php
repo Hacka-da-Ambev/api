@@ -15,14 +15,10 @@ class AuthenticationService implements IAuthenticationService
         protected IUserRepository $userRepository
     ) {}
 
-    public function register(UserDTO $data): ?AuthenticationOutput
+    public function register(UserDTO $data): AuthenticationOutput
     {
         $user = $this->userRepository->create($data);
         $token = auth()->attempt(['email' => $data->email, 'password' => $data->password]);
-
-        if (!$user || !$token) {
-            return null;
-        }
 
         return new AuthenticationOutput(
             $user,

@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\{ AuthController, BeerController };
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,3 +34,7 @@ Route
         Route::post('logout', [AuthController::class, 'logout']);
         Route::post('refresh', [AuthController::class, 'refresh']);
     });
+
+Route
+    ::middleware('api')
+    ->apiResource('beer', BeerController::class);

@@ -9,7 +9,7 @@ use Source\User\Ports\Out\IUserRepository;
 class UserEloquentRepository implements IUserRepository
 {
 
-    public function create(UserDTO $data): ?User
+    public function create(UserDTO $data): User
     {
         $user = new UserModel();
         $user->name = $data->name;
